@@ -59,13 +59,19 @@
 
         // `git sync`
         function sync(cb) {
+            /* XXX(minhoryang)
             var repo = git(__dirname);
+            */
+            var repo = git(process.env.TARGET_REPO);
             repo.sync(cb);
         }
 
         // gets the hash of the HEAD commit
         function head(cb) {
+            /* XXX(minhoryang)
             var repo = git(__dirname);
+            */
+            var repo = git(process.env.TARGET_REPO);
             repo.branch(function (err, head) {
                 if (err) { return cb(err); }
                 cb(null, head.commit.id);
@@ -74,6 +80,7 @@
 
         // starts ourself up in a new process, and kills the current one
         function restart() {
+            return;  // FIXME(minhoryang)
             var child = spawn('node', [__dirname + "/launcher.js"], {
                 detached: true,
                 stdio: 'inherit'
